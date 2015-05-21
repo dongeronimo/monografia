@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)https://msdn.microsoft.com/en-us/library/dn568100.aspx -->
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="WT.seg_1" content="en-us"><link rel="canonical" href="./Pipes and Filters Pattern_files/Pipes and Filters Pattern.html">
+        <title>Pipes and Filters Pattern</title>
+
+
+
+
+
+<meta name="DCS.dcsuri" content="/en-us/library/dn568100(d=default,l=en-us,v=pandp.10).aspx">
+
+<meta name="NormalizedUrl" content="https://msdn.microsoft.com/en-us/library/dn568100(d=default,l=en-us,v=pandp.10).aspx">
+
+<meta name="ms.normalizedurl" content="https://msdn.microsoft.com/en-us/library/dn568100(d=default,l=en-us,v=pandp.10).aspx">
+
+<meta name="DCSext.MSDNLibraryNode" content="_pandp_all_">
+
+<meta name="VotingContextUrl" content="https://msdn.microsoft.com/en-us/library/dn568100(d=default,l=en-us,v=pandp.10).aspx">
+
+<meta name="MN" content="FB361391-8:58:04 AM">
+
+<meta name="Search.ShortId" content="dn568100">
+
+<meta name="ms.shortidmsdn" content="dn568100">
+
+<meta name="Ms.Locale" content="en-us">
+
+<meta name="ms.prodver" content="PandP.10">
+
+<meta name="ms.contentlang" content="EN">
+
+<meta name="ms.lang" content="EN">
+
+<meta name="ms.loc" content="US">
+
+<meta name="ms.sitever" content="2015.05.03.1">
+
+<meta name="ms.assetid" content="d43f0d7f-98af-4790-9401-8b3b5ace60e3">
+
+<meta name="ms.auth" content="0">
+
+
+
+
+
+
+
+
+        
+    <link rel="stylesheet" type="text/css" href="./Pipes and Filters Pattern_files/Combined.css"><script type="text/javascript" src="./Pipes and Filters Pattern_files/ai.js" async=""></script><script type="text/javascript" src="./Pipes and Filters Pattern_files/wt_lib.js" async="true" defer="true"></script><script class="mtps-injected">try {
+/**/
+(window.MTPS || (window.MTPS = {})).cdnDomains || (window.MTPS.cdnDomains = { 
+	"image": "https://i-msdn.sec.s-msft.com", 
+	"js": "https://i2-msdn.sec.s-msft.com", 
+	"css": "https://i-msdn.sec.s-msft.com", 
+	"xap": "https://msdn.microsoft.com"
+});
+/**/
+} finally { MTPS._injectNextScript_0 && MTPS._injectNextScript_0(); }</script><script class="mtps-injected" src="./Pipes and Filters Pattern_files/jquery-1.8.2.min.js"></script><style>@-webkit-keyframes popdczhrtkhmebktsnjfgoqwgojdzivrmihftvixdeb {50% {-webkit-transform:scale(1.2);}100% {-webkit-transform:scale(1);}}@keyframes popdczhrtkhmebktsnjfgoqwgojdzivrmihftvixdeb {50% {-webkit-transform:scale(1.2);transform:scale(1.2);}100% {-webkit-transform:scale(1);transform:scale(1);}}#dczhrtkhmebktsnjfgoqwgojdzivrmihftvixdeb{padding:0;margin:0;font:13px Arial,Helvetica;text-transform:none;font-size: 100%;vertical-align:baseline;line-height:normal;color:#fff;position:static;border:solid 2px #fff !important;box-sizing:content-box !important;color:#fff !important;display:block !important;height:auto !important;margin:0 !important;opacity:0.9 !important;padding:7px 10px !important;position:fixed !important;visibility:visible !important;width:auto !important;z-index:2147483647 !important;-webkit-border-radius:5px !important;-webkit-box-shadow:0px 0px 20px #000 !important;-webkit-box-sizing:content-box !important;}.dczhrtkhmebktsnjfgoqwgojdzivrmihftvixdeb-blocked{padding:0;margin:0;font:13px Arial,Helvetica;text-transform:none;font-size: 100%;vertical-align:baseline;line-height:normal;color:#fff;position:static;color:#AAA !important;display:inline !important;text-decoration:line-through !important;}#dczhrtkhmebktsnjfgoqwgojdzivrmihftvixdeb br{display:block !important;padding:0;margin:0;font:13px Arial,Helvetica;text-transform:none;font-size: 100%;vertical-align:baseline;line-height:normal;color:#fff;position:static;}#dczhrtkhmebktsnjfgoqwgojdzivrmihftvixdeb span{background:transparent !important;padding:0;margin:0;font:13px Arial,Helvetica;text-transform:none;font-size: 100%;vertical-align:baseline;line-height:normal;color:#fff;position:static;}#dczhrtkhmebktsnjfgoqwgojdzivrmihftvixdeb div{padding:0;margin:0;font:13px Arial,Helvetica;text-transform:none;font-size: 100%;vertical-align:baseline;line-height:normal;color:#fff;position:static;border:0 !important;margin:0 !important;padding:0 !important;width:auto !important;letter-spacing:normal !important;font:13px Arial,Helvetica !important;text-align:left !important;text-shadow:none !important;text-transform:none !important;word-spacing:normal !important;}#dczhrtkhmebktsnjfgoqwgojdzivrmihftvixdeb a{padding:0;margin:0;font:13px Arial,Helvetica;text-transform:none;font-size: 100%;vertical-align:baseline;line-height:normal;color:#fff;position:static;font-weight:normal !important;background:none !important;text-decoration:underline !important;color:#fff !important;}a#dczhrtkhmebktsnjfgoqwgojdzivrmihftvixdeb-gear{padding:0;margin:0;font:13px Arial,Helvetica;text-transform:none;font-size: 100%;vertical-align:baseline;line-height:normal;color:#fff;position:static;text-decoration:none !important;position:absolute !important;display:none !important;font-size:20px !important;width:20px !important;height:20px !important;line-height:20px !important;text-align:center !important;background-color:rgba(255,255,255,.8) !important;background-image:url(chrome-extension://mlomiejdfkolichcflejclcbmpeaniij/data/images/gear.svg) !important;background-size:16px 16px !important;background-position:center center !important;background-repeat:no-repeat !important;text-decoration:none !important;}a#dczhrtkhmebktsnjfgoqwgojdzivrmihftvixdeb-gear:hover{-webkit-animation-name:popdczhrtkhmebktsnjfgoqwgojdzivrmihftvixdeb !important;animation-name:popdczhrtkhmebktsnjfgoqwgojdzivrmihftvixdeb !important;-webkit-animation-duration:0.3s !important;animation-duration:0.3s !important;}#dczhrtkhmebktsnjfgoqwgojdzivrmihftvixdeb:hover #dczhrtkhmebktsnjfgoqwgojdzivrmihftvixdeb-gear{text-decoration:none !important;display:inline-block !important;}@media print{#dczhrtkhmebktsnjfgoqwgojdzivrmihftvixdeb{display:none !important;}}</style><script class="mtps-injected">try {
+//
+  var literalNormalizedUrl = '/en-us/library/dn568100(l=en-us,v=pandp.10).aspx';
+  var wt_nvr_ru = 'WT_NVR_RU';
+  var wt_fpcdom = '.microsoft.com';
+  var wt_domlist = 'msdn.microsoft.com';
+  var wt_pathlist = '';
+  var wt_paramlist = 'DCSext.mtps_devcenter';
+  var wt_siteid = 'MSDN';
+  var gDomain = 'm.webtrends.com';
+  var gDcsId = 'dcsmgru7m99k7mqmgrhudo0k8_8c6m';
+  var gFpc = 'WT_FPC';
+
+
+
+  if (document.cookie.indexOf(gFpc + "=") == -1) {
+    var wtidJs = document.createElement("script");
+    wtidJs.src = "//" + gDomain + "/" + gDcsId + "/wtid.js";
+    document.getElementsByTagName("head")[0].appendChild(wtidJs);
+  }
+
+
+
+  var detectedLocale = 'en-us';
+  var wtsp = '_sto_msdn_patternsandpractices_';
+  var gTrackEvents = '0';
+/**/
+} finally { MTPS._injectNextScript_2 && MTPS._injectNextScript_2(); }</script><script class="mtps-injected">try {
+/**/
+  var omni_guid = "4997183a-fa38-4a2a-8740-ed4fc225d09a";
+/**/
+} finally { MTPS._injectNextScript_3 && MTPS._injectNextScript_3(); }</script><script class="mtps-injected">try {
+//
+
+            window.appInsightsId = '60854590-027a-4ae4-98be-2741a40f355f';
+            //
+} finally { MTPS._injectNextScript_4 && MTPS._injectNextScript_4(); }</script><script class="mtps-injected" src="./Pipes and Filters Pattern_files/Combined.js"></script><script type="text/javascript" async="true" defer="true" src="./Pipes and Filters Pattern_files/2"></script><script type="text/javascript" async="true" defer="true" src="./Pipes and Filters Pattern_files/2(1)"></script><script class="mtps-injected" src="./Pipes and Filters Pattern_files/SearchBox.jss"></script><script class="mtps-injected" src="./Pipes and Filters Pattern_files/Combined(1).js"></script><script src="./Pipes and Filters Pattern_files/broker.js"></script><script class="mtps-injected">try {
+$(document).ready(function() {
+        try {
+            var token = $("#globalRequestVerification input[name='__RequestVerificationToken']").clone();
+            $("#siteFeedbackForm").append(token);
+        } catch(err) {
+            
+        }
+    });
+} finally { MTPS._injectNextScript_8 && MTPS._injectNextScript_8(); }</script><link href="./Pipes and Filters Pattern_files/PrintView.css" rel="stylesheet" type="text/css" media="print"><script type="text/javascript" src="./Pipes and Filters Pattern_files/ms.js"></script></head>
+    <body class="library Chrome" style="visibility: visible;">
+        <div id="page">
+            
+
+            
+            
+            
+    
+
+        <script type="text/javascript" data-provides="wt_capi" data-do-not-move="true" src="./Pipes and Filters Pattern_files/wt_capi.js"></script>
+        <script type="text/javascript" data-requires="wt_capi" data-do-not-move="true" src="./Pipes and Filters Pattern_files/wto.js"></script>
+    
+    <link type="text/css" rel="stylesheet">
+    
+    <input type="hidden" id="isHeaderBleeding" value="true">
+    <div id="ux-header" dir="ltr" class="ltr msdn" data-device-type="desktop">
+        
+
+      <header>
+        <span id="singleCol"></span>
+        <span id="doubleCol"></span>
+        <span id="isMobile"></span>
+        <div>
+          <div class="row topRow">
+            <div class="top">
+              <div class="left">
+                <a class="msdnLogoImg" href="https://msdn.microsoft.com/en-us">
+                  <div id="msft-logo" class="msft-logo"></div>
+                </a>
+                <div class="GrayPipe"></div>
+                  <a class="DevCenterFullNameNonMegaBlade" href="https://msdn.microsoft.com/en-us">Developer Network</a>
+                <a class="DevCenterFullName" href="https://msdn.microsoft.com/en-us">Developer Network</a>
+                <a class="DevCenterShortName" href="https://msdn.microsoft.com/en-us">Developer</a>
+              </div>
+              <div class="right">
+                <div id="signIn">
+
+  <img class="profileImage" src="./Pipes and Filters Pattern_files/profile.jpg">
+
+
+
+<a class="scarabLink" href="https://login.live.com/login.srf?wa=wsignin1.0&rpsnv=12&ct=1432223884&rver=6.0.5276.0&wp=MCMBI&wlcxt=MSDN%24MSDN%24MSDN&wreply=https%3a%2f%2fmsdn.microsoft.com%2fen-us%2flibrary%2fdn568100.aspx&lc=1033&id=254354&mkt=en-US" title="Sign in">Sign in</a></div>
+
+
+
+
+                <div class="auxNav">
+                  <div>
+                    <div data-fragmentname="Subscriptions" id="Fragment_Subscriptions" xmlns="http://www.w3.org/1999/xhtml">
+  <a href="https://msdn.microsoft.com/subscriptions/manage/hh442900" id="Subscriptions_2153_1" xmlns="http://www.w3.org/1999/xhtml">MSDN subscriptions</a>
+</div>
+                    <div data-fragmentname="GetTools" id="Fragment_GetTools" xmlns="http://www.w3.org/1999/xhtml">
+  <a href="http://go.microsoft.com/fwlink/?LinkId=309297&clcid=0x409&slcid=0x409&campaign=o~msft~msdn~gettools-header~dn308572" id="GetTools_2153_3" xmlns="http://www.w3.org/1999/xhtml">Get tools</a>
+</div>
+                  </div>
+                  <div>
+                    <div data-fragmentname="SocialLinks" id="Fragment_SocialLinks" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <ul class="links horizontal">
+      <li>
+        <a href="http://www.facebook.com/microsoftdeveloper" target="_blank" id="SocialLinks_2152_4" class="facebook" xmlns="http://www.w3.org/1999/xhtml">http://www.facebook.com/microsoftdeveloper</a>
+      </li>
+      <li>
+        <a href="https://twitter.com/msdev" target="_blank" id="SocialLinks_2152_5" class="twitter" xmlns="http://www.w3.org/1999/xhtml">https://twitter.com/msdev</a>
+      </li>
+      <li>
+        <a href="http://plus.google.com/111221966647232053570/" target="_blank" id="SocialLinks_2152_6" class="googlePlus" xmlns="http://www.w3.org/1999/xhtml">http://plus.google.com/111221966647232053570/</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="row middleRow">
+            <div class="expandTop" style="display: none;">
+              <div class="left"></div>
+              <div class="right"></div>
+            </div>
+          </div>
+        </div>
+        <div id="buttomRowWrapper" style="background-color: #232323;">
+          <div class="row buttomRow" style="background-color: #232323">
+            <div class="bottom">
+              <div class="left">
+                <a id="grip" class="menu-icon" href="javascript:void(0)"></a>
+                
+                <div id="drawer">
+                  <div class="toc">
+                    
+        <nav>
+            <ul class="navL1">
+                        <li class="inactive toggle">
+                            <a href="javascript:void(0)" title="Technologies">Technologies</a>
+                                <ul class="navL2" style="display: none;">
+                                        <li class="inactive">
+                                            <a href="https://msdn.microsoft.com/cloud-app-development-msdn" title="Cloud">Cloud</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="https://msdn.microsoft.com/mobile-app-development-msdn" title="Mobile">Mobile</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="https://msdn.microsoft.com/web-app-development-msdn" title="Web">Web</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="https://msdn.microsoft.com/business-and-productivity-app-development-msdn" title="Business">Business</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="https://msdn.microsoft.com/big-data-development-msdn" title="Data">Data</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="https://msdn.microsoft.com/en-us/games-development-msdn" title="Gaming">Gaming</a>
+
+                                                   
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive toggle">
+                            <a href="javascript:void(0)" title="Downloads">Downloads</a>
+                                <ul class="navL2" style="display: none;">
+                                        <li class="inactive">
+                                            <a href="https://www.visualstudio.com/downloads/download-visual-studio-vs" title="Visual Studio">Visual Studio</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="https://msdn.microsoft.com/subscriptions" title="MSDN subscription access">MSDN subscription access</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="https://msdn.microsoft.com/microsoft-sdks-msdn" title="SDKs">SDKs</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive toggle">
+                                            <a href="javascript:void(0)" title="Trial software">Trial software</a>
+
+                                                <ul class="navL3" style="display: none;">
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/evalcenter" title="Free downloads">Free downloads</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/officeevaluationresources" title="Office resources">Office resources</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/sharepoint2013resources" title="SharePoint Server 2013 resources">SharePoint Server 2013 resources</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/sqlserver2014expressresources" title="SQL Server 2014 Express resources">SQL Server 2014 Express resources</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/windowsserver2012r2resources" title="Windows Server 2012 resources">Windows Server 2012 resources</a>
+                                                        </li>
+                                                </ul>
+                                                   
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive toggle">
+                            <a href="javascript:void(0)" title="Programs">Programs</a>
+                                <ul class="navL2" style="display: none;">
+                                        <li class="inactive">
+                                            <a href="https://rewards.msdn.microsoft.com/" title="Rewards">Rewards</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="https://www.microsoft.com/bizspark" title="Startups">Startups</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive toggle">
+                                            <a href="javascript:void(0)" title="Students">Students</a>
+
+                                                <ul class="navL3" style="display: none;">
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/student-developer-program" title="Develop apps">Develop apps</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="http://blogs.msdn.com/b/microsoft_student_developer_blog" title="Blog">Blog</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/microsoftstudentpartners" title="Microsoft Student Partners">Microsoft Student Partners</a>
+                                                        </li>
+                                                </ul>
+                                                   
+                                        </li>
+                                        <li class="inactive toggle">
+                                            <a href="javascript:void(0)" title="Architects">Architects</a>
+
+                                                <ul class="navL3" style="display: none;">
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/architects-overview-msdn" title="Overview">Overview</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/architects-case-studies-msdn" title="Case studies">Case studies</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/architects-blueprints-msdn" title="Blueprints">Blueprints</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="http://blogs.msdn.com/b/msarchitecture/" title="Blog">Blog</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="http://social.msdn.microsoft.com/forums/en-us/home?brandignore=true&sort=relevancedesc&searchterm=architecture+or+architect" title="Forums">Forums</a>
+                                                        </li>
+                                                </ul>
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://events.msdn.microsoft.com/" title="Events">Events</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive toggle">
+                                            <a href="javascript:void(0)" title="MSDN Subscriptions">MSDN Subscriptions</a>
+
+                                                <ul class="navL3" style="display: none;">
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/msdn-subscriptions-overview" title="Overview">Overview</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/benefits-overview" title="Benefits">Benefits</a>
+                                                        </li>
+                                                </ul>
+                                                   
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive toggle">
+                            <a href="javascript:void(0)" title="Community">Community</a>
+                                <ul class="navL2" style="display: none;">
+                                        <li class="inactive">
+                                            <a href="https://social.msdn.microsoft.com/forums/" title="Forums">Forums</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://blogs.msdn.com/b/developer-tools/" title="Blogs">Blogs</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://tech-advisors.msdn.microsoft.com/en-us" title="Tech Advisors">Tech Advisors</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://channel9.msdn.com/" title="Channel 9">Channel 9</a>
+
+                                                   
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive current toggle">
+                            <a href="javascript:void(0)" title="Documentation">Documentation</a>
+                                <ul class="navL2" style="display: none;">
+                                        <li class="inactive current">
+                                            <a href="https://msdn.microsoft.com/library" title="APIs and reference">APIs and reference</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="https://msdn.microsoft.com/developer-centers-msdn" title="Dev centers">Dev centers</a>
+
+                                                   
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive">
+                            <a href="https://code.msdn.microsoft.com/" title="Samples">Samples</a>
+                        </li>
+            </ul>
+        </nav>
+
+                  </div>
+                </div>
+              </div>
+              <div class="right">
+                <div data-fragmentname="SearchBox" id="Fragment_SearchBox" xmlns="http://www.w3.org/1999/xhtml">
+  <div class="SearchBox">
+    <form id="HeaderSearchForm" name="HeaderSearchForm" method="get" class="SearchBoxOnFocus">
+      <button id="FakeHeaderSearchButton" value="" type="submit" class="header-search-button">
+        <div id="search-finder" class="search-finder"></div>
+      </button>
+      <button id="HeaderSearchButton" style="display:none" title="Search MSDN"></button>
+      <div id="searchSplitter"></div>
+      <div id="searchCloseIcon" class="search-clear-x"></div>
+      <div id="searchTextContainer" style="width: 0px; display: none;">
+        <input id="HeaderSearchTextBox" name="query" type="text" maxlength="200" onfocus="Epx.Controls.SearchBox.watermarkFocus(event, this.title)" onblur="Epx.Controls.SearchBox.watermarkBlur(event, this.title)" autocomplete="off">
+      <div id="SearchFlyoutContainer" style="display: none; text-align: left; border: 1px solid buttonshadow; position: absolute; z-index: 1000; padding: 2px; color: rgb(255, 255, 255); font-family: Arial; font-size: 16px; background-color: rgb(255, 255, 255);"><div id="SuggestionContainer"><ul style="list-style: none; padding: 4px 2px 0px 1px; cursor: pointer; margin: 1px; white-space: nowrap;"></ul></div></div></div>
+    </form>
+    
+    
+  </div>
+</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </header>
+
+    <div id="overlayMaskHeader"></div></div>
+    
+    
+
+        
+    <div class="printExportMenus ltr">
+        <a id="isd_printABook" href="https://msdn.microsoft.com/en-us/library/export/help/?returnUrl=%2fen-us%2flibrary%2fdn568100.aspx" style="display: inline;">
+            Export (<span class="count">0</span>)
+        </a>
+        <a id="isd_print" href="https://msdn.microsoft.com/en-us/library/dn568100(d=printer).aspx" rel="nofollow">
+            Print 
+        </a>
+    </div>
+    
+
+        <div class="printExportMenus ltr">
+        <a id="expandCollapseAll" accesskey="e" href="javascript:void(0)" title="Expand/Collapse all sections by pressing Ctrl + Shift + e" style="display: none;">Expand All</a>
+    </div>
+
+    
+
+
+            <div id="body">
+                
+
+
+
+
+
+
+
+
+    <div id="leftNav" style="width: 280px; max-width: 480px; min-height: 7517px; height: auto;">
+
+
+
+<div id="tocnav">
+
+            <div class="toclevel0" data-toclevel="0" style="padding-left: 0px;">
+<a class="toc_collapsed" href="https://msdn.microsoft.com/en-us/library/dn568100.aspx#"></a><a data-tochassubtree="true" href="https://msdn.microsoft.com/en-us/library/ms123401.aspx" id="ms310241_MSDN.10_en-us" mtpsaliasid="" mtpsassetid="5DDC0A78-6B2C-43E3-9C56-55F45C0DFFA5_MSDN.10_en-us" mtpsshortid="ms123401_MSDN.10_en-us" title="MSDN Library">MSDN Library</a>            </div>
+            <div class="toclevel0" data-toclevel="0" style="padding-left: 0px;">
+<a class="toc_collapsed" href="https://msdn.microsoft.com/en-us/library/dn568100.aspx#"></a><a data-tochassubtree="true" href="https://msdn.microsoft.com/en-us/library/ff921345.aspx" id="ff653621_PandP.10_en-us" mtpsaliasid="" mtpsassetid="87CCB374-6803-42A5-B0B8-0E7C7074634F_PandP.10_en-us" mtpsshortid="ff921345_PandP.10_en-us" title="patterns &amp; practices">patterns &amp; practices</a>            </div>
+            <div class="toclevel0" data-toclevel="0" style="padding-left: 0px;">
+<a class="toc_collapsed" href="https://msdn.microsoft.com/en-us/library/dn568100.aspx#"></a><a data-tochassubtree="true" href="https://msdn.microsoft.com/en-us/library/ff898430.aspx" id="ff898435_PandP.10_en-us" mtpsaliasid="" mtpsassetid="56C9B4CA-EB89-4910-B12B-34EDCB6774C3_PandP.10_en-us" mtpsshortid="ff898430_PandP.10_en-us" title="Cloud Development">Cloud Development</a>            </div>
+            <div class="toclevel0" data-toclevel="0" style="padding-left: 0px;">
+<a class="toc_collapsed" href="https://msdn.microsoft.com/en-us/library/dn568100.aspx#"></a><a data-tochassubtree="true" href="https://msdn.microsoft.com/en-us/library/dn568099.aspx" id="dn568106_PandP.10_en-us" mtpsaliasid="" mtpsassetid="d3e8560e-8c4d-4249-a495-88c236fcf015_PandP.10_en-us" mtpsshortid="dn568099_PandP.10_en-us" title="Cloud Design Patterns: Prescriptive Architecture Guidance for Cloud Applications">Cloud Design Patterns: Prescriptive Architecture Guidance for Cloud Applications</a>            </div>
+            <div class="toclevel1" data-toclevel="1" data-childrenloaded="true" style="padding-left: 17px;">
+<a class="toc_expanded" href="https://msdn.microsoft.com/en-us/library/dn568100.aspx#"></a><a data-tochassubtree="true" href="https://msdn.microsoft.com/en-us/library/dn600223.aspx" id="dn600225_PandP.10_en-us" mtpsaliasid="" mtpsassetid="0c36c5f4-5c41-44d0-928f-f57ed1b6f902_PandP.10_en-us" mtpsshortid="dn600223_PandP.10_en-us" title="Design Patterns">Design Patterns</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn589799.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Cache-Aside Pattern">Cache-Aside Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn589784.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Circuit Breaker Pattern">Circuit Breaker Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn589804.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Compensating Transaction Pattern">Compensating Transaction Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn568101.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Competing Consumers Pattern">Competing Consumers Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn589778.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Compute Resource Consolidation Pattern">Compute Resource Consolidation Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn568103.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Command and Query Responsibility Segregation (CQRS) Pattern">Command and Query Responsibility Segregation (CQRS) Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn589792.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Event Sourcing Pattern">Event Sourcing Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn589803.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="External Configuration Store Pattern">External Configuration Store Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn589790.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Federated Identity Pattern">Federated Identity Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn589793.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Gatekeeper Pattern">Gatekeeper Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn589789.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Health Endpoint Monitoring Pattern">Health Endpoint Monitoring Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn589791.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Index Table Pattern">Index Table Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn568104.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Leader Election Pattern">Leader Election Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn589782.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Materialized View Pattern">Materialized View Pattern</a>            </div>
+            <div class="toclevel2 current" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="./Pipes and Filters Pattern_files/Pipes and Filters Pattern.html" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Pipes and Filters Pattern">Pipes and Filters Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn589794.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Priority Queue Pattern">Priority Queue Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn589783.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Queue-Based Load Leveling Pattern">Queue-Based Load Leveling Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn589788.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Retry Pattern">Retry Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn589785.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Runtime Reconfiguration Pattern">Runtime Reconfiguration Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn589780.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Scheduler Agent Supervisor Pattern">Scheduler Agent Supervisor Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn589797.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Sharding Pattern">Sharding Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn589776.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Static Content Hosting Pattern">Static Content Hosting Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn589798.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Throttling Pattern">Throttling Pattern</a>            </div>
+            <div class="toclevel2" data-toclevel="2" style="padding-left: 34px;">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/dn568102.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Valet Key Pattern">Valet Key Pattern</a>            </div>
+</div>
+        
+
+        
+
+        
+        
+        <div id="toc-resizable-ew" class="toc-resizable-ew"></div>
+        
+
+<a id="NavigationResize" href="javascript:void(0)" style="left: 280px; display: inline-block;">
+    <img class="cl_nav_resize_open" src="./Pipes and Filters Pattern_files/ImageSprite.png" title="Expand" alt="Expand">
+    <img class="cl_nav_resize_close" src="./Pipes and Filters Pattern_files/ImageSprite.png" title="Minimize" alt="Minimize" style="display: none;">
+</a>
+
+
+
+    </div>
+<div id="content" class="content" style="margin-left: 280px; width: auto;">
+
+
+
+
+
+
+
+        
+
+<div class="topic" xmlns="http://www.w3.org/1999/xhtml">
+  <h1 class="title">Pipes and Filters Pattern</h1>
+  
+  <div id="mainSection">
+      <div id="mainBody">
+        
+        
+        <p>
+          <a href="https://msdn.microsoft.com/en-us/library/dn600220.aspx"><img id="messaging" alt="Messaging" src="./Pipes and Filters Pattern_files/IC709490.png" title="Messaging" xmlns=""></a>
+          <a href="https://msdn.microsoft.com/en-us/library/dn600217.aspx"><img id="design_dev" alt="Design and Implementation" src="./Pipes and Filters Pattern_files/IC709492.png" title="Design and Implementation" xmlns=""></a>
+          <a href="https://msdn.microsoft.com/en-us/library/dn600223.aspx"><img id="design_pattern" alt="Design Patterns" src="./Pipes and Filters Pattern_files/IC709485.png" title="Design Patterns" xmlns=""></a>
+          <a href="http://code.msdn.microsoft.com/Pipes-and-Filters-Code-e7cbf42f"><img id="sample_code" alt="Download code sample" src="./Pipes and Filters Pattern_files/IC712347.png" title="Download code sample" xmlns=""></a>
+          <a href="https://msdn.microsoft.com/en-us/library/dn568099.aspx"><img id="patterns_guidance" alt="Show All" src="./Pipes and Filters Pattern_files/IC709871.png" title="Show All" xmlns=""></a>
+        </p>
+        <p>Decompose a task that performs complex processing into a series of discrete elements that can be reused. This pattern can improve performance, scalability, and reusability by allowing task elements that perform the processing to be deployed and scaled independently.</p>
+        <h1 class="heading">Context and Problem</h1>
+        <p>An application may be required to perform a variety of tasks of varying complexity on the information that it processes. A straightforward but inflexible approach to implementing this application could be to perform this processing as monolithic module. However, this approach is likely to reduce the opportunities for refactoring the code, optimizing it, or reusing it if parts of the same processing are required elsewhere within the application. </p>
+        <p>Figure 1 illustrates the issues with processing data by using the monolithic approach. An application receives and processes data from two sources. The data from each source is processed by a separate module that performs a series of tasks to transform this data, before passing the result to the business logic of the application. </p>
+        <p>
+          <img id="DDA1687B9F2689CC895A5730875CB945" alt="Figure 1 - A solution implemented by using monolithic modules" src="./Pipes and Filters Pattern_files/IC707852.png" title="Figure 1 - A solution implemented by using monolithic modules" xmlns="">
+        </p>
+        <p class="label">
+          </p><div class="caption">Figure 1 - A solution implemented by using monolithic modules</div>
+        
+        <br>
+        <p>Some of the tasks that the monolithic modules perform are functionally very similar, but the modules have been designed separately. The code that implements the tasks is closely coupled within a module, and this code has been developed with little or no thought given to reuse or scalability. </p>
+        <p>However, the processing tasks performed by each module, or the deployment requirements for each task, could change as business requirements are amended. Some tasks might be compute-intensive and could benefit from running on powerful hardware, while others might not require such expensive resources. Furthermore, additional processing might be required in the future, or the order in which the tasks performed by the processing could change. A solution is required that addresses these issues, and increases the possibilities for code reuse. </p>
+        <h1 class="heading">Solution</h1>
+        <p>Decompose the processing required for each stream into a set of discrete components (or <em>filters</em>), each of which performs a single task. By standardizing the format of the data that each component receives and emits, these filters can be combined together into a pipeline. This helps to avoid duplicating code, and makes it easy to remove, replace, or integrate additional components if the processing requirements change. Figure 2 shows an example of this structure.</p>
+        <p>
+          <img id="C5850D12CE8AC45846E1BCEBF45B9096" alt="Figure 2 - A solution implemented by using pipes and filters" src="./Pipes and Filters Pattern_files/IC707853.png" title="Figure 2 - A solution implemented by using pipes and filters" xmlns="">
+        </p>
+        <p class="label">
+          </p><div class="caption">Figure 2 - A solution implemented by using pipes and filters</div>
+        
+        <br>
+        <p>The time taken to process a single request depends on the speed of the slowest filter in the pipeline. It is possible that one or more filters could prove to be a bottleneck, especially if a large number of requests appear in a stream from a particular data source. A key advantage of the pipeline structure is that it provides opportunities for running parallel instances of slow filters, enabling the system to spread the load and improve throughput. </p>
+        <p>The filters that comprise a pipeline can run on different machines, enabling them to be scaled independently and can take advantage of the elasticity that many cloud environments provide. A filter that is computationally intensive can run on high performance hardware, while other less demanding filters can be hosted on commodity (cheaper) hardware. The filters do not even have to be in the same data center or geographical location, which allows each element in a pipeline to run in an environment that is close to the resources it requires. </p>
+        <p>Figure 3 shows an example applied to the pipeline for the data from Source 1. </p>
+        <p>
+          <img id="1E7FDBE8433418D9A52EE466A9DBFC02" alt="Figure 3 - Load-balancing components in a pipeline" src="./Pipes and Filters Pattern_files/IC709557.png" title="Figure 3 - Load-balancing components in a pipeline" xmlns="">
+        </p>
+        <p class="label">
+          </p><div class="caption">Figure 3 - Load-balancing components in a pipeline</div>
+        
+        <br>
+        <p>If the input and output of a filter are structured as a stream, it may be possible to perform the processing for each filter in parallel.  The first filter in the pipeline can commence its work and start to emit its results, which are passed directly on to the next filter in the sequence before the first filter has completed its work.</p>
+        <p>Another benefit is the resiliency that this model can provide. If a filter fails or the machine it is running on is no longer available, the pipeline may be able to reschedule the work the filter was performing and direct this work to another instance of the component.  Failure of a single filter does not necessarily result in failure of the entire pipeline.</p>
+        <p>Using the Pipes and Filters pattern in conjunction with the <a href="https://msdn.microsoft.com/en-us/library/dn589804.aspx">Compensating Transaction pattern</a> can provide an alternative approach to implementing distributed transactions. A distributed transaction can be broken down into separate compensable tasks, each of which can be implemented by using a filter that also implements the Compensating Transaction pattern. The filters in a pipeline can be implemented as separate hosted tasks running close to the data that they maintain.</p>
+        <h1 class="heading">Issues and Considerations</h1>
+        <p>You should consider the following points when deciding how to implement this pattern:</p>
+        <ul>
+          <li>
+            <strong>Complexity</strong>. The increased flexibility that this pattern provides can also introduce complexity, especially if the filters in a pipeline are distributed across different servers. </li>
+          <li>
+            <strong>Reliability</strong>. Use an infrastructure that ensures data flowing between filters in a pipeline will not be lost.  </li>
+          <li>
+            <strong>Idempotency</strong>. If a filter in a pipeline fails after receiving a message and the work is rescheduled to another instance of the filter, part of the work may have already been completed. If this work updates some aspect of the global state (such as information stored in a database), the same update could be repeated. A similar issue might arise if a filter fails after posting its results to the next filter in the pipeline, but before indicating that it has completed its work successfully. In these cases, the same work could be repeated by another instance of the filter, causing the same results to be posted twice. This could result in subsequent filters in the pipeline processing the same data twice. Therefore filters in a pipeline should be designed to be idempotent. For more information see <a href="http://blog.jonathanoliver.com/2010/04/idempotency-patterns/">Idempotency Patterns</a> on Jonathan Oliver’s blog.</li>
+          <li>
+            <strong>Repeated messages</strong>. If a filter in a pipeline fails after posting a message to the next stage of the pipeline, another instance of the filter may be run (as described by the idempotency consideration above), and it will post a copy of the same message to the pipeline. This could cause two instances of the same message to be passed to the next filter. To avoid this, the pipeline should detect and eliminate duplicate messages.<div class="alert"><table><tbody><tr><th><img id="note" alt="Dn568100.note(en-us,PandP.10).gif" src="./Pipes and Filters Pattern_files/clear.gif" title="Dn568100.note(en-us,PandP.10).gif" xmlns="" class="cl_IC101471">Note:</th></tr><tr><td>If you are implementing the pipeline by using message queues (such as Microsoft Azure Service Bus queues), the message queuing infrastructure may provide automatic duplicate message detection and removal. </td></tr></tbody></table><p></p></div></li>
+          <li>
+            <strong>Context and state</strong>. In a pipeline, each filter essentially runs in isolation and should not make any assumptions about how it was invoked. This means that each filter must be provided with sufficient context with which it can perform its work. This context may comprise a considerable amount of state information. </li>
+        </ul>
+        <h1 class="heading">When to Use this Pattern</h1>
+        <p>Use this pattern when:</p>
+        <ul>
+          <li>The processing required by an application can easily be decomposed into a set of discrete, independent steps.</li>
+          <li>The processing steps performed by an application have different scalability requirements.<div class="alert"><table><tbody><tr><th><img id="note" alt="Dn568100.note(en-us,PandP.10).gif" src="./Pipes and Filters Pattern_files/clear.gif" title="Dn568100.note(en-us,PandP.10).gif" xmlns="" class="cl_IC101471">Note:</th></tr><tr><td>It may be possible to group filters that should scale together in the same process. For more information, see the <a href="https://msdn.microsoft.com/en-us/library/dn589778.aspx">Compute Resource Consolidation pattern</a>.</td></tr></tbody></table><p></p></div></li>
+          <li>Flexibility is required to allow reordering of the processing steps performed by an application, or the capability to add and remove steps.</li>
+          <li>The system can benefit from distributing the processing for steps across different servers.</li>
+          <li>A reliable solution is required that minimizes the effects of failure in a step while data is being processed. </li>
+        </ul>
+        <p>This pattern might not be suitable when:</p>
+        <ul>
+          <li>The processing steps performed by an application are not independent, or they must be performed together as part of the same transaction.</li>
+          <li>The amount of context or state information required by a step makes this approach inefficient. It may be possible to persist state information to a database instead, but do not use this strategy if the additional load on the database causes excessive contention.</li>
+        </ul>
+        <h1 class="heading">Example</h1>
+        <p>You can use a sequence of message queues to provide the infrastructure required to implement a pipeline. An initial message queue receives unprocessed messages. A component implemented as a filter task listens for a message on this queue, performs its work, and then posts the transformed message to the next queue in the sequence. Another filter task can listen for messages on this queue, process them, post the results to another queue, and so on until the fully transformed data appears in the final message in the queue.</p>
+        <p>
+          <img id="B07877DDE3A777FC231BFDF20E69DB0F" alt="Figure 4 - Implementing a pipeline by using message queues" src="./Pipes and Filters Pattern_files/IC709558.png" title="Figure 4 - Implementing a pipeline by using message queues" xmlns="">
+        </p>
+        <p class="label">
+          </p><div class="caption">Figure 4 - Implementing a pipeline by using message queues</div>
+        
+        <br>
+        <p>If you are building a solution on Azure you can use Service Bus queues to provide a reliable and scalable queuing mechanism. The <strong>ServiceBusPipeFilter</strong> class shown below provides an example. It demonstrates how you can implement a filter that receives input messages from a queue, processes these messages, and posts the results to another queue.</p>
+        <div class="alert">
+          <table>
+            <tbody><tr><th>
+                <img id="note" alt="Dn568100.note(en-us,PandP.10).gif" src="./Pipes and Filters Pattern_files/clear.gif" title="Dn568100.note(en-us,PandP.10).gif" xmlns="" class="cl_IC101471">Note:</th></tr>
+            <tr><td>The <strong>ServiceBusPipeFilter</strong> class is defined in the PipesAndFilters.Shared project in the PipesAndFilters solution. This sample code is available is available for download with this guidance.</td></tr>
+          </tbody></table>
+          <p>
+        </p></div>
+        
+<div id="code-snippet-1" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>C#</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_4b1cf8b9-9f78-4c69-ae50-7a764088f1a2');">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_4b1cf8b9-9f78-4c69-ae50-7a764088f1a2" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre><span style="color:Blue;">public</span> <span style="color:Blue;">class</span> ServiceBusPipeFilter
+{
+  ...
+  <span style="color:Blue;">private</span> <span style="color:Blue;">readonly</span> <span style="color:Blue;">string</span> inQueuePath;
+  <span style="color:Blue;">private</span> <span style="color:Blue;">readonly</span> <span style="color:Blue;">string</span> outQueuePath;
+  ...
+  <span style="color:Blue;">private</span> QueueClient inQueue;
+  <span style="color:Blue;">private</span> QueueClient outQueue;
+  ...
+
+  <span style="color:Blue;">public</span> ServiceBusPipeFilter(..., <span style="color:Blue;">string</span> inQueuePath, <span style="color:Blue;">string</span> outQueuePath = <span style="color:Blue;">null</span>)
+  {
+     ...
+     <span style="color:Blue;">this</span>.inQueuePath = inQueuePath;
+     <span style="color:Blue;">this</span>.outQueuePath = outQueuePath;
+  }
+
+  <span style="color:Blue;">public</span> <span style="color:Blue;">void</span> Start()
+  {
+    ...
+    <span style="color:Green;">// Create the outbound filter queue if it does not exist.</span>
+    ...
+    <span style="color:Blue;">this</span>.outQueue = QueueClient.CreateFromConnectionString(...);
+    
+    ...
+    <span style="color:Green;">// Create the inbound and outbound queue clients.</span>
+    <span style="color:Blue;">this</span>.inQueue = QueueClient.CreateFromConnectionString(...);
+  }
+
+  <span style="color:Blue;">public</span> <span style="color:Blue;">void</span> OnPipeFilterMessageAsync(
+    Func&lt;BrokeredMessage, Task&lt;BrokeredMessage&gt;&gt; asyncFilterTask, ...) 
+  {
+    ...
+
+    <span style="color:Blue;">this</span>.inQueue.OnMessageAsync(
+      <span style="color:Blue;">async</span> (msg) =&gt;
+    {
+      ...
+      <span style="color:Green;">// Process the filter and send the output to the </span>
+      <span style="color:Green;">// next queue in the pipeline.</span>
+      <span style="color:Blue;">var</span> outMessage = <span style="color:Blue;">await</span> asyncFilterTask(msg);
+
+      <span style="color:Green;">// Send the message from the filter processor </span>
+      <span style="color:Green;">// to the next queue in the pipeline.</span>
+      <span style="color:Blue;">if</span> (outQueue != <span style="color:Blue;">null</span>)
+      {
+        <span style="color:Blue;">await</span> outQueue.SendAsync(outMessage);
+      }
+
+      <span style="color:Green;">// Note: There is a chance that the same message could be sent twice </span>
+      <span style="color:Green;">// or that a message may be processed by an upstream or downstream </span>
+      <span style="color:Green;">// filter at the same time.</span>
+      <span style="color:Green;">// This would happen in a situation where processing of a message was</span>
+      <span style="color:Green;">// completed, it was sent to the next pipe/queue, and then failed </span>
+      <span style="color:Green;">// to complete when using the PeekLock method.</span>
+      <span style="color:Green;">// Idempotent message processing and concurrency should be considered </span>
+      <span style="color:Green;">// in a real-world implementation.</span>
+    },
+    options);
+  }
+
+  <span style="color:Blue;">public</span> <span style="color:Blue;">async</span> Task Close(TimeSpan timespan)
+  {
+    <span style="color:Green;">// Pause the processing threads.</span>
+    <span style="color:Blue;">this</span>.pauseProcessingEvent.Reset();
+
+    <span style="color:Green;">// There is no clean approach for waiting for the threads to complete</span>
+    <span style="color:Green;">// the processing. This example simply stops any new processing, waits</span>
+    <span style="color:Green;">// for the existing thread to complete, then closes the message pump </span>
+    <span style="color:Green;">// and finally returns.</span>
+    Thread.Sleep(timespan);
+
+    <span style="color:Blue;">this</span>.inQueue.Close();
+    ...
+  }
+
+  ...
+}
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+
+      <p>The <strong>Start</strong> method in the <strong>ServiceBusPipeFilter</strong> class connects to a pair of input and output queues, and the <strong>Close</strong> method disconnects from the input queue. The <strong>OnPipeFilterMessageAsync</strong> method performs the actual processing of messages; the <strong>asyncFilterTask</strong> parameter to this method specifies the processing to be performed. The <strong>OnPipeFilterMessageAsync</strong> method waits for incoming messages on the input queue, runs the code specified by the <strong>asyncFilterTask</strong> parameter over each messages as it arrives, and posts the results to the output queue. The queues themselves are specified by the constructor. </p><p>The sample solution implements filters in a set of worker roles. Each worker role can be scaled independently, depending on the complexity of the business processing that it performs or the resources that it requires to perform this processing. Additionally, multiple instances of each worker role can be run in parallel to improve throughput. </p><p>The following code shows a Azure worker role named <strong>PipeFilterARoleEntry</strong>, which is defined in the <strong>PipeFilterA</strong> project in the sample solution. </p>
+        
+<div id="code-snippet-2" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>C#</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_79b5daf6-f540-4c76-99d8-ff9c47d1592e');">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_79b5daf6-f540-4c76-99d8-ff9c47d1592e" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre><span style="color:Blue;">public</span> <span style="color:Blue;">class</span> PipeFilterARoleEntry : RoleEntryPoint
+{
+  ...
+  <span style="color:Blue;">private</span> ServiceBusPipeFilter pipeFilterA;
+
+  <span style="color:Blue;">public</span> <span style="color:Blue;">override</span> <span style="color:Blue;">bool</span> OnStart()
+  {
+    ...
+    <span style="color:Blue;">this</span>.pipeFilterA = <span style="color:Blue;">new</span> ServiceBusPipeFilter(
+      ...,
+      Constants.QueueAPath,
+      Constants.QueueBPath);
+
+    <span style="color:Blue;">this</span>.pipeFilterA.Start();
+    ...
+  }
+
+  <span style="color:Blue;">public</span> <span style="color:Blue;">override</span> <span style="color:Blue;">void</span> Run()
+  {
+    <span style="color:Blue;">this</span>.pipeFilterA.OnPipeFilterMessageAsync(<span style="color:Blue;">async</span> (msg) =&gt;
+    {
+      <span style="color:Green;">// Clone the message and update it.</span>
+      <span style="color:Green;">// Properties set by the broker (Deliver count, enqueue time, ...) </span>
+      <span style="color:Green;">// are not cloned and must be copied over if required.</span>
+      <span style="color:Blue;">var</span> newMsg = msg.Clone();
+      
+      <span style="color:Blue;">await</span> Task.Delay(500); <span style="color:Green;">// DOING WORK</span>
+
+      Trace.TraceInformation(<span style="color:#A31515;">"Filter A processed message:{0} at {1}"</span>, 
+        msg.MessageId, DateTime.UtcNow);
+
+      newMsg.Properties.Add(Constants.FilterAMessageKey, <span style="color:#A31515;">"Complete"</span>);
+
+      <span style="color:Blue;">return</span> newMsg;
+    });
+
+    ...
+  }
+
+  ...
+}
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+
+      <p>This role contains a <strong>ServiceBusPipeFilter</strong> object. The <strong>OnStart</strong> method in the role connects to the queues for receiving input messages and posting output messages (the names of the queues are defined in the <strong>Constants</strong> class). The <strong>Run</strong> method invokes the <strong>OnPipeFilterMessagesAsync</strong> method to perform some processing on each message that is received (in this example, the processing is simulated by waiting for a short period of time). When processing is complete, a new message is constructed containing the results (in this case, the input message is simply augmented with a custom property), and this message is posted to the output queue.</p><p>The sample code contains another worker role named <strong>PipeFilterBRoleEntry</strong> in the <strong>PipeFilterB</strong> project. This role is similar to <strong>PipeFilterARoleEntry</strong> except that it performs different processing in the <strong>Run</strong> method. In the example solution, these two roles are combined to construct a pipeline; the output queue for the <strong>PipeFilterARoleEntry</strong> role is the input queue for the <strong>PipeFilterBRoleEntry</strong> role.</p><p>The sample solution also provides two further roles named <strong>InitialSenderRoleEntry</strong> (in the InitialSender project) and <strong>FinalReceiverRoleEntry</strong> (in the FinalReceiver project). The <strong>InitialSenderRoleEntry</strong> role provides the initial message in the pipeline. The <strong>OnStart</strong> method connects to a single queue and the <strong>Run</strong> method posts a method to this queue. This queue is the input queue used by the <strong>PipeFilterARoleEntry</strong> role, so posting a message to this queue causes the message to be received and processed by the <strong>PipeFilterARoleEntry</strong> role. The processed message then passes through the <strong>PipeFilterBRoleEntry</strong> role.</p><p>The input queue for the <strong>FinalReceiveRoleEntry</strong> role is the output queue for the <strong>PipeFilterBRoleEntry</strong> role. The <strong>Run</strong> method in the <strong>FinalReceiveRoleEntry</strong> role, shown below, receives the message and performs some final processing. Then it writes the values of the custom properties added by the filters in the pipeline to the trace output.</p>
+        
+<div id="code-snippet-3" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>C#</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_9162bd69-8e74-4417-a69a-ca14152dcc05');">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_9162bd69-8e74-4417-a69a-ca14152dcc05" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre><span style="color:Blue;">public</span> <span style="color:Blue;">class</span> FinalReceiverRoleEntry : RoleEntryPoint
+{
+  ...
+  <span style="color:Green;">// Final queue/pipe in the pipeline from which to process data.</span>
+  <span style="color:Blue;">private</span> ServiceBusPipeFilter queueFinal;
+
+  <span style="color:Blue;">public</span> <span style="color:Blue;">override</span> <span style="color:Blue;">bool</span> OnStart()
+  {
+    ...
+    <span style="color:Green;">// Set up the queue.</span>
+    <span style="color:Blue;">this</span>.queueFinal = <span style="color:Blue;">new</span> ServiceBusPipeFilter(...,Constants.QueueFinalPath);
+    <span style="color:Blue;">this</span>.queueFinal.Start();
+    ...
+  }
+
+  <span style="color:Blue;">public</span> <span style="color:Blue;">override</span> <span style="color:Blue;">void</span> Run()
+  {
+    <span style="color:Blue;">this</span>.queueFinal.OnPipeFilterMessageAsync(
+      <span style="color:Blue;">async</span> (msg) =&gt;
+      {
+        <span style="color:Blue;">await</span> Task.Delay(500); <span style="color:Green;">// DOING WORK</span>
+
+        <span style="color:Green;">// The pipeline message was received.</span>
+        Trace.TraceInformation(
+          <span style="color:#A31515;">"Pipeline Message Complete - FilterA:{0} FilterB:{1}"</span>,
+          msg.Properties[Constants.FilterAMessageKey],
+          msg.Properties[Constants.FilterBMessageKey]);
+
+        <span style="color:Blue;">return</span> <span style="color:Blue;">null</span>;
+      });
+    ...
+  }
+
+  ...
+}
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+
+      <h1 class="heading">Related Patterns and Guidance</h1><p>The following patterns and guidance may also be relevant when implementing this pattern:</p><ul><li><a href="https://msdn.microsoft.com/en-us/library/dn568101.aspx">Competing Consumers Pattern</a>. A pipeline can contain multiple instances of one or more filters. This approach is useful for running parallel instances of slow filters, enabling the system to spread the load and improve throughput. Each instance of a filter will compete for input with the other instances; two instances of a filter should not be able to process the same data. The Competing Consumers pattern provides more information on this approach.</li><li><a href="https://msdn.microsoft.com/en-us/library/dn589778.aspx">Compute Resource Consolidation Pattern</a>. It may be possible to group filters that should scale together into the same process. The Compute Resource Consolidation pattern provides more information about the benefits and tradeoffs of this strategy.</li><li><a href="https://msdn.microsoft.com/en-us/library/dn589804.aspx">Compensating Transaction Pattern</a>.<strong> </strong>A filter can be implemented as an operation that can be reversed, or that has a compensating operation that restores the state to a previous version in the event of a failure. The Compensating Transaction pattern explains how this type of operation may be implemented in order to maintain or achieve eventual consistency. </li></ul><h1 class="heading">More Information</h1><ul><li>The article <a href="http://blog.jonathanoliver.com/2010/04/idempotency-patterns/">Idempotency Patterns</a> on Jonathan Oliver’s blog. </li></ul><p>This pattern has a sample application associated with it. You can download the "Cloud Design Patterns – Sample Code" from the Microsoft Download Center at <a href="http://aka.ms/cloud-design-patterns-sample">http://aka.ms/cloud-design-patterns-sample</a>.</p></div>
+      <div id="topicLinks" class="navigationLinks">
+        <a href="https://msdn.microsoft.com/en-us/library/dn589794.aspx">Next Topic</a>
+        <span> | </span>
+        <a href="https://msdn.microsoft.com/en-us/library/dn589782.aspx">Previous Topic</a>
+      
+        <span> | </span>
+        <a href="https://msdn.microsoft.com/en-us/library/dn568099.aspx">Home</a>
+        <span> | </span>
+        <a href="https://wag.codeplex.com/">Community</a>
+      </div>
+      <br>
+      <br>
+        <p><a href="http://microsoft.com/practices"><img id="pnp-logo" alt="patterns &amp; practices Developer Center" src="./Pipes and Filters Pattern_files/IC658452.png" title="patterns &amp; practices Developer Center" xmlns=""></a></p>
+      
+      <div>
+        <span id="pandpDate"></span>
+      </div>
+    </div>
+</div>
+
+
+    
+
+
+
+
+<div class="libraryMemberFilter">
+    <div class="filterContainer">
+        <span>Show:</span>
+        <label>
+            <input type="checkbox" class="libraryFilterInherited" checked="checked" value="Inherit">Inherited
+        </label>
+        <label>
+            <input type="checkbox" class="libraryFilterProtected" checked="checked" value="Protected">Protected
+        </label>
+    </div>
+</div>
+    
+<input type="hidden" id="libraryMemberFilterEmptyWarning" value="There are no members available with your current filter settings.">
+
+
+ 
+</div>
+
+
+            </div>
+            <div class="clear"></div>
+
+            
+    
+<input name="__RequestVerificationToken" type="hidden" value="Fnpt1h2mzlrg4sgKqMgE6Ks4xx1weXZ_HOIhnRVVbclq1dlMHTkBtQqi9nYr-Q-cYrA9bOvUiHLF2RYtlQ303sTXCc81">
+<input id="ratingSubmitUrl" type="hidden" value="https://msdn.microsoft.com/en-us/library/feedback/add/dn568100.aspx">
+<input id="isTopicRated" type="hidden" value="false">
+
+
+    
+
+    
+    <link type="text/css" rel="stylesheet">
+    
+    <div id="ux-footer" class="" style="" dir="ltr">
+            
+            <div id="footerSock" class="librarySock both">
+                <div id="footerSockInner">
+                        <a name="feedback"></a>
+
+<div class="rating">
+    <div id="ratingSection1">
+        <div class="title">
+            Was this page helpful?
+        </div>
+        <div class="description">
+            Your feedback about this content is important.<br>Let us know what you think.
+        </div>
+        <div class="buttons">
+            <button class="button" id="ratingYes">Yes</button>
+            <button class="button" id="ratingNo">No</button>
+        </div>
+        <input id="ratingValue" type="hidden" value="">
+    </div>
+    <div id="ratingSection2">
+        <div class="title">
+            Additional feedback?
+        </div>
+        <textarea id="ratingText" rows="6" cols="" maxlength="1500"></textarea>
+        <div class="counter right">
+            <span id="feedbackTextCounter">1500</span> characters remaining
+        </div>
+        <div class="buttons left">
+            <button class="button" id="ratingSubmit">Submit</button>
+            <button class="button" id="ratingSkipThis">Skip this</button>
+        </div>
+    </div>
+    <div id="ratingSection3">
+        <div class="title">
+            Thank you!
+        </div>
+        <div class="description">
+            We appreciate your feedback.
+        </div>
+    </div>
+    
+    
+    <div id="contentFeedbackQAContainer" style="display: none;"></div>
+</div>
+    
+                    <div class="userVoice">
+    <div class="title">
+        Have a suggestion to improve MSDN Library?
+    </div>
+        <div class="description">
+            Visit our UserVoice Page to submit and vote on ideas!
+        </div>
+    <div class="buttons">
+        <a class="button" id="userVoiceButton" href="http://feedback.msdn.com/forums/257782-msdn-feature-suggestions/category/83975" target="_blank">Make a suggestion</a>
+    </div>
+</div>  
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+        <footer class="top">
+            <div data-fragmentname="LeftLinks" id="Fragment_LeftLinks" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <div class="linkListTitle">Dev centers</div>
+    <ul class="links">
+      <li>
+        <a href="https://dev.windows.com/" id="LeftLinks_2148_1" class="windowsBlue" xmlns="http://www.w3.org/1999/xhtml">Windows</a>
+      </li>
+      <li>
+        <a href="http://dev.office.com/" id="LeftLinks_2148_3" class="office" xmlns="http://www.w3.org/1999/xhtml">Office</a>
+      </li>
+      <li>
+        <a href="https://msdn.microsoft.com/vstudio" id="LeftLinks_2148_4" class="visualStudio" xmlns="http://www.w3.org/1999/xhtml">Visual Studio</a>
+      </li>
+      <li>
+        <a href="http://azure.microsoft.com/en-us/documentation/" target="_blank" id="LeftLinks_2148_12" xmlns="http://www.w3.org/1999/xhtml">Microsoft Azure</a>
+      </li>
+      <li>
+        <a href="https://msdn.microsoft.com/aa937802" id="LeftLinks_2148_5" xmlns="http://www.w3.org/1999/xhtml">More...</a>
+      </li>
+    </ul>
+  </div>
+</div>    
+            <div id="rightLinks">
+                <div data-fragmentname="CenterLinks1" id="Fragment_CenterLinks1" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <div class="linkListTitle">Learning resources</div>
+    <ul class="links">
+      <li>
+        <a href="http://www.microsoftvirtualacademy.com/" id="CenterLinks1_2151_4" xmlns="http://www.w3.org/1999/xhtml">Microsoft Virtual Academy</a>
+      </li>
+      <li>
+        <a href="http://channel9.msdn.com/" id="CenterLinks1_2151_5" xmlns="http://www.w3.org/1999/xhtml">Channel 9</a>
+      </li>
+      <li>
+        <a href="http://www.interoperabilitybridges.com/" id="CenterLinks1_2151_6" xmlns="http://www.w3.org/1999/xhtml">Interoperability Bridges</a>
+      </li>
+      <li>
+        <a href="https://msdn.microsoft.com/magazine/" id="CenterLinks1_2151_7" xmlns="http://www.w3.org/1999/xhtml">MSDN Magazine</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                <div data-fragmentname="CenterLinks2" id="Fragment_CenterLinks2" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <div class="linkListTitle">Community</div>
+    <ul class="links">
+      <li>
+        <a href="https://social.msdn.microsoft.com/forums/en-us/home" id="CenterLinks2_2151_8" xmlns="http://www.w3.org/1999/xhtml">Forums</a>
+      </li>
+      <li>
+        <a href="http://blogs.msdn.com/b/developer-tools/" id="CenterLinks2_2151_9" xmlns="http://www.w3.org/1999/xhtml">Blogs</a>
+      </li>
+      <li>
+        <a href="http://www.codeplex.com/" id="CenterLinks2_2151_10" xmlns="http://www.w3.org/1999/xhtml">Codeplex</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                <div data-fragmentname="CenterLinks3" id="Fragment_CenterLinks3" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <div class="linkListTitle">Support</div>
+    <ul class="links">
+      <li>
+        <a href="https://msdn.microsoft.com/hh361695" id="CenterLinks3_2151_11" xmlns="http://www.w3.org/1999/xhtml">Self support</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                <div data-fragmentname="CenterLinks4" id="Fragment_CenterLinks4" xmlns="http://www.w3.org/1999/xhtml" class="nth-child-4n">
+  
+  <div class="linkList">
+    <div class="linkListTitle">Programs</div>
+    <ul class="links">
+      <li>
+        <a href="https://www.microsoft.com/bizspark/" id="CenterLinks4_2151_13" xmlns="http://www.w3.org/1999/xhtml">BizSpark (for startups)</a>
+      </li>
+      <li>
+        <a href="https://www.dreamspark.com/" id="CenterLinks4_2151_14" xmlns="http://www.w3.org/1999/xhtml">DreamSpark</a>
+      </li>
+      <li>
+        <a href="http://www.imaginecup.com/" id="CenterLinks4_2151_17" xmlns="http://www.w3.org/1999/xhtml">Imagine Cup</a>
+      </li>
+    </ul>
+  </div>
+</div>                
+            </div>
+        </footer>
+    
+        <footer class="bottom">
+            <span class="localeContainer">
+                
+    <form class="selectLocale" id="selectLocaleForm" action="https://msdn.microsoft.com/en-us/selectlocale-dmc">
+        <input type="hidden" name="fromPage" value="https%3a%2f%2fmsdn.microsoft.com%2fen-us%2flibrary%2fdn568100.aspx">
+        <a href="https://msdn.microsoft.com/en-us/library/dn568100.aspx#" onclick="$(&#39;#selectLocaleForm&#39;).submit();return false;" title="Change your language">United States (English)</a>
+    </form>
+
+
+            </span>
+        
+            <div data-fragmentname="BottomLinks" id="Fragment_BottomLinks" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <ul class="links horizontal">
+      <li>
+        <a href="https://msdn.microsoft.com/newsletter.aspx" id="BottomLinks_2148_7" xmlns="http://www.w3.org/1999/xhtml">Newsletter</a>
+      </li>
+      <li>
+        <a href="https://msdn.microsoft.com/dn529288" id="BottomLinks_2148_8" xmlns="http://www.w3.org/1999/xhtml">Privacy &amp; cookies</a>
+      </li>
+      <li>
+        <a href="https://msdn.microsoft.com/cc300389" id="BottomLinks_2148_9" xmlns="http://www.w3.org/1999/xhtml">Terms of use</a>
+      </li>
+      <li>
+        <a href="https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/EN-US.aspx" id="BottomLinks_2148_10" xmlns="http://www.w3.org/1999/xhtml">Trademarks</a>
+      </li>
+    </ul>
+  </div>
+</div>    
+            <span class="logoLegal">
+                <span class="logo"></span>
+                <span class="copyright">© 2015 Microsoft</span>
+            </span>
+        </footer>
+    </div>
+    
+
+
+            <div class="footerPrintView">
+                <div class="footerCopyrightPrintView">© 2015 Microsoft</div>
+            </div>
+
+            
+            
+    
+    
+    <input id="tocPaddingPerLevel" type="hidden" value="17">
+
+
+
+            <input id="MtpsDevice" type="hidden" value="Default">
+
+
+<!--[CDATA[ Third party scripts and code linked to or referenced from this website are licensed to you by the parties that own such code, not by Microsoft.  See ASP.NET Ajax CDN Terms of Use – http://www.asp.net/ajaxlibrary/CDN.ashx. ]]-->
+
+            
+            
+            
+            
+            
+
+
+
+
+
+
+<noscript>&lt;div&gt;&lt;img alt="DCSIMG" id="Img1" width="1" height="1" src="https://m.webtrends.com/dcsmgru7m99k7mqmgrhudo0k8_8c6m/njs.gif?dcsuri=/nojavascript&amp;amp;WT.js=No" /&gt;&lt;/div&gt;</noscript>
+
+
+
+
+
+
+
+
+
+<noscript>
+  &lt;a href="http://www.omniture.com" title="Web Analytics"&gt;
+    &lt;img src="//msstonojsmsdn.112.2o7.net/b/ss/msstonojsmsdn/1/H.20.2--NS/0" height="1" width="1" border="0" alt="" /&gt;
+  &lt;/a&gt;
+</noscript>
+            
+
+
+
+
+<div id="globalRequestVerification">
+    <input name="__RequestVerificationToken" type="hidden" value="SvXnKIiiFETJ_JOYeOOiCy0Hy_fJvEZgeziN9iHl6rSu2FJEOL_fa3P39CsB4dpmOt_kIA2AlJmFKUqiSs9i4ekZB8E1">
+</div>
+
+
+        </div>
+
+        
+        
+        
+        
+    <script type="text/javascript" class="mtps-injected">
+/*<![CDATA[*/
+(function(window,document){"use strict";function preload(scripts){for(var result=[],script,e,i=0;i<scripts.length;i++)script=scripts[i],script.hasOwnProperty("url")&&(e=document.createElement("script"),e.src=script.url,script.throwaway=e),result.push(script);return result}function inject(scripts,index){var script,elem;if(index>=scripts.length){delete mtps.injectScripts;return}script=scripts[index];elem=document.createElement("script");elem.className="mtps-injected";elem.async=!1;var isLoaded=!1,timeoutId=0,injectNextFnName="",injectNext=elem.onerror=function(){isLoaded||(isLoaded=!0,inject(scripts,index+1),window.clearTimeout(timeoutId),elem.onload=elem.onerror=elem.onreadystatechange=null,injectNextFnName&&delete mtps[injectNextFnName],elem.removeEventListener&&elem.removeEventListener("load",injectNext,!1))};elem.addEventListener?elem.addEventListener("load",injectNext,!1):elem.readyState==="uninitialized"?elem.onreadystatechange=function(){(this.readyState==="loaded"||this.readyState==="complete")&&injectNext()}:elem.onload=injectNext;script.hasOwnProperty("url")?(timeoutId=window.setTimeout(injectNext,12e4),elem.src=script.url):(injectNextFnName="_injectNextScript_"+index,mtps[injectNextFnName]=injectNext,timeoutId=window.setTimeout(injectNext,2e3),elem.text="try {\n"+script.txt+"\n} finally { MTPS."+injectNextFnName+" && MTPS."+injectNextFnName+"(); }");parent.appendChild(elem)}var mtps=window.MTPS||(window.MTPS={}),parent=document.getElementsByTagName("head")[0];mtps.injectScripts=function(scripts){inject(preload(scripts),0)}})(window,document);
+MTPS.injectScripts([
+	{ txt: "/**/\r\n(window.MTPS || (window.MTPS = {})).cdnDomains || (window.MTPS.cdnDomains = { \r\n\t\"image\": \"https://i-msdn.sec.s-msft.com\", \r\n\t\"js\": \"https://i2-msdn.sec.s-msft.com\", \r\n\t\"css\": \"https://i-msdn.sec.s-msft.com\", \r\n\t\"xap\": \"https://msdn.microsoft.com\"\r\n});\r\n/**/" },
+	{ url: "https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js" },
+	{ txt: "//\n  var literalNormalizedUrl = \u0027/en-us/library/dn568100(l=en-us,v=pandp.10).aspx\u0027;\n  var wt_nvr_ru = \u0027WT_NVR_RU\u0027;\n  var wt_fpcdom = \u0027.microsoft.com\u0027;\n  var wt_domlist = \u0027msdn.microsoft.com\u0027;\n  var wt_pathlist = \u0027\u0027;\n  var wt_paramlist = \u0027DCSext.mtps_devcenter\u0027;\n  var wt_siteid = \u0027MSDN\u0027;\n  var gDomain = \u0027m.webtrends.com\u0027;\n  var gDcsId = \u0027dcsmgru7m99k7mqmgrhudo0k8_8c6m\u0027;\n  var gFpc = \u0027WT_FPC\u0027;\n\n\n\n  if (document.cookie.indexOf(gFpc + \"=\") == -1) {\n    var wtidJs = document.createElement(\"script\");\n    wtidJs.src = \"//\" + gDomain + \"/\" + gDcsId + \"/wtid.js\";\n    document.getElementsByTagName(\"head\")[0].appendChild(wtidJs);\n  }\n\n\n\n  var detectedLocale = \u0027en-us\u0027;\n  var wtsp = \u0027_sto_msdn_patternsandpractices_\u0027;\n  var gTrackEvents = \u00270\u0027;\n/**/" },
+	{ txt: "/**/\n  var omni_guid = \"4997183a-fa38-4a2a-8740-ed4fc225d09a\";\n/**/" },
+	{ txt: "//\n\n            window.appInsightsId = \u002760854590-027a-4ae4-98be-2741a40f355f\u0027;\n            //" },
+	{ url: "https://i2-msdn.sec.s-msft.com/Combined.js?resources=0:Utilities,1:Layout,2:Header,1:Rating,2:Footer,0:Topic,3:webtrendsscript,4:omni_rsid_MSDN,5:WEDCS,0:AppInsightsPerf,6:Toc,1:SearchBox;/Areas/Epx/Content/Scripts:0,/Areas/Epx/Themes/Base/Content:1,/Areas/Centers/Themes/StandardDevCenter/Content:2,/Areas/Global/Content/Webtrends/resources:3,/Areas/Global/Content/Omniture/resources/MSDN:4,/Areas/Library/Themes/Base/Content:5,/Areas/Library/Content:6\u0026amp;hashKey=16C495B6737743669CA9553B9E94C533\u0026amp;v=28A1E70AC1235E96652655E76F13F6AD" },
+	{ url: "https://i1.services.social.microsoft.com/search/Widgets/SearchBox.jss?boxid=HeaderSearchTextBox\u0026btnid=HeaderSearchButton\u0026brand=Msdn\u0026loc=en-us\u0026focusOnInit=false\u0026emptyWatermark=true\u0026searchButtonTooltip=Search MSDN" },
+	{ url: "https://i2-msdn.sec.s-msft.com/Combined.js?resources=0:PrintExportButton,1:NavigationResize,1:LibraryMemberFilter,2:Toc_Fixed,2:CodeSnippet,2:TopicNotInScope,2:CollapsibleArea,2:VersionSelector,2:SurveyBroker;/Areas/Library/Themes/Base/Content:0,/Areas/Library/Content:1,/Areas/Epx/Content/Scripts:2\u0026amp;hashKey=3248804C2DE1E642F8B20C4F83DBEA3B\u0026amp;v=28A1E70AC1235E96652655E76F13F6AD" },
+	{ txt: "$(document).ready(function() {\n        try {\n            var token = $(\"#globalRequestVerification input[name=\u0027__RequestVerificationToken\u0027]\").clone();\n            $(\"#siteFeedbackForm\").append(token);\n        } catch(err) {\n            \n        }\n    });" }
+]);
+
+/*]]>*/
+</script>
+<script src="./Pipes and Filters Pattern_files/broker-config.js"></script><div id="overlayMask"></div></body></html>
