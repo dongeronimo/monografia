@@ -1,4 +1,5 @@
 #include "VolumeInteractorStyle.h"
+#include <assert.h>
 vtkStandardNewMacro(VolumeInteractionStyle);
 void VolumeInteractionStyle::OnKeyDown(){
 	vtkRenderer* ren = this->Interactor->GetRenderWindow()->GetRenderers()->GetFirstRenderer();
@@ -13,6 +14,9 @@ void VolumeInteractionStyle::OnKeyDown(){
 	}
 	else if(key=="Return"){
 		assert(Image!=0);
+		assert(!StencilFilter.IsNull());
+		assert(VtkImporter!=0);
+		assert(Mapper!=0);
 		//Só de construir o sólido eu já tenho o contorno e o polydata do sólido
 		SolidoDeEstrusao solido(Pontos, ren);
 		//ritual pra gerar o stencil a partir de polígonos
@@ -22,8 +26,11 @@ void VolumeInteractionStyle::OnKeyDown(){
 		PolydataToStencil->SetInformationInput(Image);
 		PolydataToStencil->Update();
 		vtkSmartPointer<vtkImageStencilData> GeneratedStencilData = PolydataToStencil->GetOutput();//aqui eu tenho o stencil, pronto pra ser usado
-		//usa-o
-
+		//COLOCA O STENCIL NO FILTER
+		StencilFilter->AddStencil(GeneratedStencilData);
+		//ATUALIZA A PIPELINE
+		UpdateVTKPipelineService service(StencilFilter, VtkImporter,Mapper);//(0,0,0);
+		service.Execute();
 		//bota o contorno na tela
 		vtkSmartPointer<vtkActor> atorDoSolido = solido.GetPropDoContorno();
 		Interactor->GetRenderWindow()->GetRenderers()->GetFirstRenderer()->AddViewProp(atorDoSolido);

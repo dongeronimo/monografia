@@ -24,6 +24,9 @@
     <ClCompile Include="SolidoDeExtrusao.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UpdateVTKPipelineService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VolumeData.h">
@@ -42,6 +45,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="SolidoDeExtrusao.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdateVTKPipelineService.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

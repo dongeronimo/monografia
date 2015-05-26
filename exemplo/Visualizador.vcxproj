@@ -332,6 +332,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MyItkStencil.cpp" />
     <ClCompile Include="SolidoDeExtrusao.cpp" />
+    <ClCompile Include="UpdateVTKPipelineService.cpp" />
     <ClCompile Include="VolumeData.cpp" />
     <ClCompile Include="VolumeInteractionStyle.cpp" />
   </ItemGroup>
@@ -340,6 +341,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="ItkTypedefs.h" />
     <ClInclude Include="MyItkStencil.h" />
     <ClInclude Include="SolidoDeExtrusao.h" />
+    <ClInclude Include="UpdateVTKPipelineService.h" />
     <ClInclude Include="VolumeData.h" />
     <ClInclude Include="VolumeInteractorStyle.h" />
   </ItemGroup>

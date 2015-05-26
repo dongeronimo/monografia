@@ -42,12 +42,16 @@ int main(int argc, char** argv){
 	vtkVolume* Actor = CreateActor(Mapper);
 
 	vtkRenderer *ren1 = vtkRenderer::New();
+	ren1->GetActiveCamera()->ParallelProjectionOn();
 	vtkRenderWindow *renWin = vtkRenderWindow::New();
 	renWin->AddRenderer(ren1);
 
 	vtkRenderWindowInteractor *iren = vtkRenderWindowInteractor::New();
 	vtkSmartPointer<VolumeInteractionStyle> VolumeInteraction = vtkSmartPointer<VolumeInteractionStyle>::New();
 	VolumeInteraction->SetImageData(ImporterToVtk->GetOutput());
+	VolumeInteraction->SetStencilFilter(Stencil);
+	VolumeInteraction->SetMapper(Mapper);
+	VolumeInteraction->SetVTKImporter(ImporterToVtk);
 	iren->SetInteractorStyle(VolumeInteraction);
 	iren->SetRenderWindow(renWin);
  
