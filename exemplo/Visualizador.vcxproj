@@ -329,6 +329,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DicomImageInteractorStyle.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MyItkStencil.cpp" />
     <ClCompile Include="SolidoDeExtrusao.cpp" />
@@ -337,6 +338,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="VolumeInteractionStyle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DicomImageInteractorStyle.h" />
     <ClInclude Include="PontoNaTela.h" />
     <ClInclude Include="ItkTypedefs.h" />
     <ClInclude Include="MyItkStencil.h" />

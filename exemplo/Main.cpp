@@ -16,6 +16,8 @@
 #include <vtkImageData.h>
 #include "VolumeInteractorStyle.h"
 #include <vtkSmartPointer.h>
+#include <vtkImageViewer2.h>
+#include "DicomImageInteractorStyle.h"
 #include <vtkDICOMImageReader.h>
 
 TImageSource::Pointer CreateImageSource(VolumeData d);
@@ -62,6 +64,20 @@ int main(int argc, char** argv){
 	ren1->ResetCamera();
 	ren1->GetActiveCamera()->Zoom(1.5);
 	renWin->Render();
+	
+	vtkSmartPointer<vtkRenderWindow> DicomWindow = vtkSmartPointer<vtkRenderWindow>::New();
+	vtkSmartPointer<vtkImageViewer2> imageViewer = vtkSmartPointer<vtkImageViewer2>::New();
+	imageViewer->SetRenderWindow(DicomWindow);//adiciona o visualizador de série à janela principal
+	imageViewer->SetInputConnection(ImporterToVtk->GetOutputPort());//conecta o visualizador de dicoms à saída da pipeline
+	vtkSmartPointer<vtkRenderWindowInteractor> renderWindowInteractor = vtkSmartPointer<vtkRenderWindowInteractor>::New();
+	vtkSmartPointer<DicomImageInteractorStyle> dicomStyle = vtkSmartPointer<DicomImageInteractorStyle>::New();
+	dicomStyle->SetImageViewer(imageViewer);
+	imageViewer->SetupInteractor(renderWindowInteractor);
+	renderWindowInteractor->SetInteractorStyle(dicomStyle);
+	imageViewer->Render();
+	imageViewer->GetRenderer()->ResetCamera();
+	imageViewer->Render();	
+
 	iren->Start();
 	return 0;
 }

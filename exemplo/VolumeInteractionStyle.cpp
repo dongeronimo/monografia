@@ -37,5 +37,6 @@ void VolumeInteractionStyle::OnKeyDown(){
 		Pontos.clear();
 		//atualiza a tela.
 		ren->Render();
+		Interactor->Render();
 	}
 }
