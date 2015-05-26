@@ -39,6 +39,15 @@ int main(int argc, char** argv){
 	Stencil->SetInput(ImporterToItk->GetOutput());
 	Stencil->Update();
 
+	TSegmentator::Pointer Segmentador = TSegmentator::New();
+	TImage::SizeType radius;
+	radius[0] = 1;
+	radius[1] = 1;
+	radius[2] = 1;
+	Segmentador->SetRadius(radius);
+	Segmentador->SetReplaceValue(1);
+	Segmentador->SetInput(Stencil->GetInput());
+
 	vtkImageAlgorithm* ImporterToVtk = CreateVTKImage(dados);
 	vtkGPUVolumeRayCastMapper* Mapper = CreateMapper(ImporterToVtk);
 	vtkVolume* Actor = CreateActor(Mapper);
@@ -72,6 +81,11 @@ int main(int argc, char** argv){
 	vtkSmartPointer<vtkRenderWindowInteractor> renderWindowInteractor = vtkSmartPointer<vtkRenderWindowInteractor>::New();
 	vtkSmartPointer<DicomImageInteractorStyle> dicomStyle = vtkSmartPointer<DicomImageInteractorStyle>::New();
 	dicomStyle->SetImageViewer(imageViewer);
+	dicomStyle->SetSegmentador(Segmentador);
+	dicomStyle->SetImageInput(ImporterToVtk);
+
+	ImporterToItk->UpdateLargestPossibleRegion();
+	
 	imageViewer->SetupInteractor(renderWindowInteractor);
 	renderWindowInteractor->SetInteractorStyle(dicomStyle);
 	imageViewer->Render();

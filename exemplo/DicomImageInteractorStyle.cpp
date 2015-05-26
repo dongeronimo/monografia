@@ -9,6 +9,8 @@
 #include <vtkRenderWindow.h>
 #include <vtkRendererCollection.h>
 #include <vtkRenderer.h>
+#include <vtkImageData.h>
+
 vtkStandardNewMacro(DicomImageInteractorStyle);
 //-----------------------------------------------------------
 void DicomImageInteractorStyle::SetImageViewer(vtkSmartPointer<vtkImageViewer2> iv){
@@ -17,7 +19,26 @@ void DicomImageInteractorStyle::SetImageViewer(vtkSmartPointer<vtkImageViewer2> 
 	this->MaxSlice = iv->GetSliceMax();
 	this->Slice = this->MinSlice;
 	vtkDebugMacro("Fatias: ["<<this->MinSlice<<","<<this-MaxSlice<<"]");
-	
+}
+
+void DicomImageInteractorStyle::OnLeftButtonDown(){
+	assert(VtkImage!=0);
+	int* pos = this->GetInteractor()->GetEventPosition();
+	vtkSmartPointer<vtkCellPicker> _picker = vtkSmartPointer<vtkCellPicker>::New();
+	vtkRenderer* ren = this->GetInteractor()->GetRenderWindow()->GetRenderers()->GetFirstRenderer();
+	_picker->SetTolerance(0.0005);
+	_picker->Pick(pos[0], pos[1], 0, ren);
+	double* worldPosition = _picker->GetPickPosition();
+	cout<<"cell id is: "<<_picker->GetCellId()<<endl;
+	coords[0] = _picker->GetCellIJK()[0];
+	coords[1] = _picker->GetCellIJK()[1];
+	coords[2] = _picker->GetCellIJK()[2];
+	cout<<"cell coords is: "<<coords[0]<<","<<coords[1]<<","<<coords[2]<<endl;//aqui eu tenho qual cell.
+	val = VtkImage->GetOutput()->GetScalarComponentAsFloat(coords[0], coords[1], coords[2], 0);
+	vtkInteractorStyleImage::OnLeftButtonDown();
+}
+void DicomImageInteractorStyle::OnLeftButtonUp(){
+	vtkInteractorStyleImage::OnLeftButtonUp();
 }
 
 void DicomImageInteractorStyle::MoveForward(){
@@ -46,19 +67,11 @@ void DicomImageInteractorStyle::MoveBackward(){
 }
 /////////////////////////////////////////////////////////////////////////////////////
 void DicomImageInteractorStyle::OnMouseMove(){
-	int* pos = this->GetInteractor()->GetEventPosition();
-	vtkSmartPointer<vtkCellPicker> _picker = vtkSmartPointer<vtkCellPicker>::New();
-	vtkRenderer* ren = this->GetInteractor()->GetRenderWindow()->GetRenderers()->GetFirstRenderer();
-	_picker->SetTolerance(0.0005);
-	_picker->Pick(pos[0], pos[1], 0, ren);
-	double* worldPosition = _picker->GetPickPosition();
-	cout<<"cell id is: "<<_picker->GetCellId()<<endl;
-	int* coords = _picker->GetCellIJK();
-	cout<<"cell coords is: "<<coords[0]<<","<<coords[1]<<","<<coords[2]<<endl;//aqui eu tenho qual cell.
-	//this->
+	vtkInteractorStyleImage::OnMouseMove();
 }
 
 void DicomImageInteractorStyle::OnKeyDown(){
+	assert(!Segmentador.IsNull());
 	std::string tecla = this->GetInteractor()->GetKeySym();
 	vtkDebugMacro("tecla: "<<tecla);
 	if(tecla=="Up"){
@@ -66,7 +79,22 @@ void DicomImageInteractorStyle::OnKeyDown(){
 	}
 	else if (tecla=="Down"){
 		MoveBackward();
-	}else if(tecla=="p"){
+	}else if(tecla=="s"){
+		TImage::IndexType seed;
+		seed[0] = coords[0]; 
+		seed[1] = coords[1];
+		seed[2] = coords[2];
+
+		Segmentador->SetSeed(seed);
+		Segmentador->SetReplaceValue(1);
+		
+		Segmentador->SetLower(val - 10);
+		Segmentador->SetUpper(val + 10);
+
+		Segmentador->SetNumberOfThreads(8);
+		std::cout<<"bar"<<std::endl;
+		Segmentador->Update();
+		std::cout<<"foobar"<<std::endl;
 	}
 }
 

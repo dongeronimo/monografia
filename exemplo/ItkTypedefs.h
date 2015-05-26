@@ -3,6 +3,7 @@
 #include <itkImage.h>
 #include <itkImportImageFilter.h>
 #include <itkImageSource.h>
+#include <itkNeighborhoodConnectedImageFilter.h>
 #include "MyItkStencil.h"
 
 typedef itk::Image<short, 3> TImage;
@@ -11,5 +12,5 @@ typedef itk::ImageSource<TMask> TMaskSource;
 typedef itk::ImportImageFilter<short, 3> TItkImageImport;
 typedef itk::ImageSource<TImage> TImageSource;
 typedef itk::MyItkStencil<TImage> TStencilFilter;
-
+typedef itk::NeighborhoodConnectedImageFilter<TImage, TMask> TSegmentator;
 #endif
