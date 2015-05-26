@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\geronimo\Desktop\monografia-git\monografia\exemplo\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{55894C34-C0C7-47C0-B6F8-8970A6948BDF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VolumeData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyItkStencil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VolumeInteractionStyle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SolidoDeExtrusao.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="VolumeData.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ItkTypedefs.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyItkStencil.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VolumeInteractorStyle.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PontoNaTela.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SolidoDeExtrusao.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+</Project>
